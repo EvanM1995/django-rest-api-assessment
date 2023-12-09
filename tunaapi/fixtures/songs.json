@@ -1,0 +1,12 @@
+[
+  {
+    "model": "tunaapi.song",
+    "pk": 1,
+    "fields": {
+      "title": "Just a little boy",
+      "artist_id": 1,
+      "album": "To Be Kind",
+      "length": "00 00:12:39"
+    }
+  }
+]
