@@ -11,7 +11,7 @@ class ViewArtist(ViewSet):
 
     def retrieve(self, request, pk):
         """Handle GET requests for single artist
-      
+
         Returns:
           Response -- JSON serialized artist
         """
