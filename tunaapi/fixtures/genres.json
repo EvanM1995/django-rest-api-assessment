@@ -1,0 +1,9 @@
+[
+  {
+    "model": "tunaapi.genre",
+    "pk": 1,
+    "fields": {
+      "description": "Harsh Noise"
+    }
+  }
+]
