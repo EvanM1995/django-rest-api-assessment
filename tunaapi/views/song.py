@@ -1,5 +1,4 @@
 from django.http import HttpResponseServerError
-from django.utils.dateparse import parse_duration
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
@@ -42,8 +41,8 @@ class ViewSong(ViewSet):
         if requested_genre is not None:
             songs = Song.objects.filter(genres__genre_id__id=requested_genre)
 
-        serializer = SongSerializer(songs, many=True)
-        return Response(serialzer.data)
+        serializer = SongSerializer(songs, many = True)
+        return Response(serializer.data)
 
     def create(self, request):
         """Handle POST requests for songs
@@ -57,11 +56,11 @@ class ViewSong(ViewSet):
         song = Song.objects.create(
             title=request.data["title"],
             album=request.data["album"],
-            length=parse_duration(request.data["length"]),
+            length=(request.data["length"]),
             artist_id=artist_id,
         )
         serializer = SongSerializer(song)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def update(self, request, pk):
         """Handle PUT requests for a song
@@ -73,12 +72,13 @@ class ViewSong(ViewSet):
         song = Song.objects.get(pk=pk)
         song.title = request.data["title"]
         song.album = request.data["album"]
-        song.length = parse_duration(request.data["length"])
+        song.length = request.data["length"]
 
         artist_id = Artist.objects.get(pk=request.data["artistId"])
         song.artist_id = artist_id
         song.save()
 
+        serializer = SongSerializer(song)
         return Response(None, status=status.HTTP_204_NO_CONTENT)
 
     def destroy(self, request, pk):
@@ -101,5 +101,5 @@ class SongSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Song
-        fields = ("id", "title", "artist_id", "album", "length", "genres")
+        fields = ('id', 'title', 'artist_id', 'album', 'length', 'genres')
         depth = 1

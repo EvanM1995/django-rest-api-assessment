@@ -5,7 +5,8 @@
     "fields": {
         "name": "M. Gira",
         "age": 37,
-        "bio": "Born in LA, he is a trailblazer of independent music"
+        "bio": "Born in LA, he is a trailblazer of independent music",
+        "song_count": 1
     }
   }
 ]
